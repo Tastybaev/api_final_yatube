@@ -16,6 +16,6 @@ v1_router.register(r'follow', FollowViewSet, basename='follow')
 
 urlpatterns = [
     path('v1/', include(v1_router.urls)),
-    path('v1/follow', include(v1_router.urls)),
+    path('v1/follow/', include(v1_router.urls)),
     path('v1/api-token-auth/', views.obtain_auth_token),
 ]
