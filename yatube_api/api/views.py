@@ -47,7 +47,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 class GeneralFollowViewSet(
     mixins.CreateModelMixin,
-    mixins.ListModelMixin, 
+    mixins.ListModelMixin,
     viewsets.GenericViewSet
 ):
     pass
