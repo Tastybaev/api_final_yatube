@@ -37,8 +37,7 @@ class CommentViewSet(viewsets.ModelViewSet):
     ]
 
     def perform_create(self, serializer):
-        post_id = self.kwargs.get('post_id')
-        post = get_object_or_404(Post, pk=post_id)
+        post = get_object_or_404(Post, id=self.kwargs.get('post_id'))
         serializer.save(author=self.request.user, post=post)
 
     def get_queryset(self):
@@ -46,12 +45,15 @@ class CommentViewSet(viewsets.ModelViewSet):
         return post.comments
 
 
-class CreateFollowViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
-                          viewsets.GenericViewSet):
+class GeneralFollowViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin, 
+    viewsets.GenericViewSet
+):
     pass
 
 
-class FollowViewSet(CreateFollowViewSet):
+class FollowViewSet(GeneralFollowViewSet):
     serializer_class = FollowSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = (filters.SearchFilter,)
