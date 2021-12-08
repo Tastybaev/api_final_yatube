@@ -53,7 +53,11 @@ class FollowViewSet(viewsets.ModelViewSet):
         return Follow.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        obj = Follow.objects.filter(user=self.request.user, following=serializer.validated_data['following']).first()
+        obj = Follow.objects.filter(
+            user=self.request.user,
+            following=serializer.validated_data['following']).first()
         if obj:
-            raise HttpResponseBadRequest('You are already following this user')
+            raise HttpResponseBadRequest(
+                'You are already following this user'
+            )
         serializer.save(user=self.request.user)
