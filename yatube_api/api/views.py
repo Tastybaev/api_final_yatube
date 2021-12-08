@@ -53,11 +53,4 @@ class FollowViewSet(viewsets.ModelViewSet):
         return Follow.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        obj = Follow.objects.filter(
-            user=self.request.user,
-            following=serializer.validated_data['following']).first()
-        if obj:
-            raise HttpResponseBadRequest(
-                'Вы уже подписаны на этого пользователя!'
-            )
         serializer.save(user=self.request.user)
