@@ -58,6 +58,6 @@ class FollowViewSet(viewsets.ModelViewSet):
             following=serializer.validated_data['following']).first()
         if obj:
             raise HttpResponseBadRequest(
-                'You are already following this user'
+                'Вы уже подписаны на этого пользователя!'
             )
         serializer.save(user=self.request.user)
